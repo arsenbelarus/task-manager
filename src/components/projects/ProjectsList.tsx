@@ -1,15 +1,19 @@
 import React from "react";
+import ProjectSummary from "./ProjectSummary";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../store/store";
+import {ProjectReducerType} from "../../store/reducers/projectReducer";
 
 const ProjectsList = () => {
+  const data = useSelector<AppRootStateType, ProjectReducerType>(state => state.project)
+
   return (
     <div className={'projectsList section'}>
-      <div className={'card z-depth-0 projectSummary'}>
-        <div className={'card-content grey-text text-darken-3'}>
-          <span className={'card-title'}>  Project Title  </span>
-          <p> Posted by </p>
-          <p className={'grey-text'}> Posted by </p>
-        </div>
-      </div>
+      {
+        data && data.projects.map(project => {
+          return <ProjectSummary key={project.id} project={project}/>
+        })
+      }
     </div>
   )
 }

@@ -6,9 +6,26 @@ body {
   font-size: 62.5%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: grey;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+form {
+  padding: 20px;
+  margin-top: 60px;
+  border-radius: 10px;
+}
+
+form button, form h5 {
+  margin: 20px 0;
+}
+
+.btnSignUP {
+  width: 80%;
+  height: 60px;
+  font-size: 1.8rem;
 }
