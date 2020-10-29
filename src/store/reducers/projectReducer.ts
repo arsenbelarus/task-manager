@@ -1,4 +1,5 @@
 import {Dispatch} from "react";
+import {projectsApi} from "../../api/apiFirebase";
 
 const ADD_PROJECT = 'ADD_PROJECT';
 const DELETE_PROJECT = 'DELETE_PROJECT';
@@ -22,21 +23,43 @@ export const projectReducer = (state = initState, action: ActionTypes) => {
 
 }
 
+//ACTIONS
 export const addProjectAC = (project: ProjectType) => ({type: ADD_PROJECT, project} as const)
-export const deleteProjectTC = (id: string) => {
+export const deleteProjectAC = (id: string) => ({type: DELETE_PROJECT, id} as const)
+
+//THUNKS
+export const addProject = (project: ProjectType) => {
+
+  return (dispatch: Dispatch<any>, getState: any, getFirestore: () => any, getFirebase: () => any) => {
+    // some async with database, then if OK
+    projectsApi.sendProject ( {
+      ...project,
+      userFirstName: 'David',
+      userLastName: 'Vaskanian',
+      createdAt: new Date(),
+    })
+      .then(() => { dispatch(addProjectAC(project)) })
+      .catch((err: any) => { console.log(err)} )
+  }
+}
+export const deleteProject = (id: string) => {
   return (dispatch: Dispatch<any>) => {
-    dispatch({type: DELETE_PROJECT, id})
+    // some async with database, the if OK
+    dispatch(deleteProjectAC(id))
   }
 }
 
 
-type ActionTypes =  | ReturnType<typeof addProjectAC> | {type: typeof DELETE_PROJECT, id: string}
+type ActionTypes =  | ReturnType<typeof addProjectAC> | ReturnType<typeof deleteProjectAC>
 
 
 export type ProjectType = {
   id: string,
   title: string,
   description: string,
+  userFirstName?: string,
+  userLastName?: string,
+  createdAt?: Date,
 }
 export type ProjectReducerType = {
   projects: ProjectType[]

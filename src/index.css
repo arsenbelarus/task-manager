@@ -29,3 +29,10 @@ form button, form h5 {
   height: 60px;
   font-size: 1.8rem;
 }
+
+.removeIcon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}

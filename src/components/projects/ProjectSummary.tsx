@@ -1,5 +1,5 @@
 import React from "react";
-import {deleteProjectTC, ProjectType} from "../../store/reducers/projectReducer";
+import {deleteProject, ProjectType} from "../../store/reducers/projectReducer";
 import {useDispatch} from "react-redux";
 
 type ProjectSummaryType = {
@@ -9,15 +9,15 @@ type ProjectSummaryType = {
 const ProjectSummary = (props: ProjectSummaryType) => {
 
   const dispatch = useDispatch()
-  const handler = () => {dispatch(deleteProjectTC(props.project.id))}
+  const deleteHandler = () => {dispatch(deleteProject(props.project.id))}
 
   return (
-    <div className={'card z-depth-0 projectSummary'}>
+    <div className={'card z-depth-4 projectSummary'}>
       <div className={'card-content grey-text text-darken-3'}>
         <span className={'card-title'}>  {props.project.title}  </span>
         <p> Posted by </p>
         <p className={'grey-text'}> date will appear here </p>
-        <button onClick={handler}> Delete </button>
+        <i className="material-icons small removeIcon" onClick={deleteHandler}>delete_forever</i>
       </div>
     </div>
   )

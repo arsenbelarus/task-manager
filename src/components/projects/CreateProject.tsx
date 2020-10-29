@@ -1,6 +1,6 @@
 import React, {FormEvent, useState} from "react";
 import {useDispatch} from "react-redux";
-import {addProjectAC} from "../../store/reducers/projectReducer";
+import {addProject} from "../../store/reducers/projectReducer";
 import { v4 as uuidv4 } from 'uuid';
 
 const CreateProject = () => {
@@ -11,7 +11,9 @@ const CreateProject = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const projectFromForm = {id: uuidv4(), title, description}
-    dispatch(addProjectAC(projectFromForm))
+    dispatch(addProject(projectFromForm))
+    setTitle('')
+    setDescription('')
   }
 
   return (
