@@ -15,8 +15,10 @@ const ProjectSummary = (props: ProjectSummaryType) => {
     <div className={'card z-depth-4 projectSummary'}>
       <div className={'card-content grey-text text-darken-3'}>
         <span className={'card-title'}>  {props.project.title}  </span>
-        <p> Posted by </p>
-        <p className={'grey-text'}> date will appear here </p>
+        <p> {`Posted by ${props.project.userFirstName} ${props.project.userLastName}`} </p>
+        <p className={'grey-text'}> {
+          `Created on ${new Date (props.project.createdAt.toDate()).toLocaleDateString()}  at  ${new Date (props.project.createdAt.toDate()).getHours()}:${new Date (props.project.createdAt.toDate()).getMinutes()}`
+        } </p>
         <i className="material-icons small removeIcon" onClick={deleteHandler}>delete_forever</i>
       </div>
     </div>

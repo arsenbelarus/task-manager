@@ -1,16 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
 import ProjectSummary from "./ProjectSummary";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {getProjectsFromFirebase, ProjectReducerType} from "../../store/reducers/projectReducer";
 import {AppRootStateType} from "../../store/store";
-import {ProjectReducerType} from "../../store/reducers/projectReducer";
 
 const ProjectsList = () => {
-  const data = useSelector<AppRootStateType, ProjectReducerType>(state => state.project)
+  const dispatch = useDispatch()
+  const { projects } = useSelector<AppRootStateType, ProjectReducerType>(state => state.project)
+
+  useEffect(() => {
+    dispatch(getProjectsFromFirebase)
+  }, [projects, dispatch])
 
   return (
     <div className={'projectsList section'}>
       {
-        data && data.projects.map(project => {
+        projects && projects.map(project => {
           return <ProjectSummary key={project.id} project={project}/>
         })
       }

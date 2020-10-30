@@ -16,6 +16,7 @@ export const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.firestore().settings({timestampsInSnapshots: true});
+export const projectFirestore = firebase.firestore();
+export const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
 export default firebase

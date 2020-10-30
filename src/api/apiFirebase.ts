@@ -7,17 +7,16 @@ const axiosFirebase = axios.create({
     "Content-Type": "text/plain",
     "API-KEY": "AIzaSyAoiQDQ0uj3l1_XZbRlBarC-qk-IECqfYo",
   },
-  withCredentials: true
 })
 
 export const projectsApi = {
   sendProject (project: ProjectType) {
     return axiosFirebase.post('projects.json', project)
   },
-/*  getPosts () {
-    return axiosFireBase.get("posts.json")
+  getProjects () {
+    return axiosFirebase.get('projects.json')
   },
-  deletePost (serverID: string) {
+/*  deletePost (serverID: string) {
     return axiosFireBase.delete(`posts/${serverID}.json`)
   }*/
 }

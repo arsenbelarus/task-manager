@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, createStore, compose} from "redux";
 import thunk from 'redux-thunk';
 import {getFirebase, firebaseReducer} from 'react-redux-firebase';
-import {getFirestore, createFirestoreInstance, firestoreReducer, reduxFirestore} from 'redux-firestore';
+import {getFirestore, firestoreReducer, reduxFirestore} from 'redux-firestore';
 import {authReducer} from "./reducers/authReducer";
 import {projectReducer} from "./reducers/projectReducer";
 import firebase, {firebaseConfig} from "./../config/firebaseConfig";
@@ -21,19 +21,21 @@ export const store = createStore(
     // @ts-ignore
     reduxFirestore(firebase, firebaseConfig),
     applyMiddleware(thunk.withExtraArgument({ getFirestore, getFirebase })),
-  )
+  ),
 );
 
+/*
 export const rrfConfig = {
   userProfile: 'users',
   useFirestoreForProfile: true
 }
+*/
 
-export const rrfProps = {
+/*export const rrfProps = {
   firebase,
   config: firebaseConfig,
   dispatch: store.dispatch,
   createFirestoreInstance
-};
+};*/
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
