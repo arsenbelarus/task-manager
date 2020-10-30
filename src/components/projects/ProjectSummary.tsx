@@ -9,7 +9,11 @@ type ProjectSummaryType = {
 const ProjectSummary = (props: ProjectSummaryType) => {
 
   const dispatch = useDispatch()
-  const deleteHandler = () => {dispatch(deleteProject(props.project.id))}
+
+  const removeHandler = (e: React.BaseSyntheticEvent<MouseEvent, EventTarget & HTMLElement, EventTarget>) => {
+    e.preventDefault()
+    dispatch(deleteProject(props.project.id))
+  }
 
   return (
     <div className={'card z-depth-4 projectSummary'}>
@@ -17,9 +21,11 @@ const ProjectSummary = (props: ProjectSummaryType) => {
         <span className={'card-title'}>  {props.project.title}  </span>
         <p> {`Posted by ${props.project.userFirstName} ${props.project.userLastName}`} </p>
         <p className={'grey-text'}> {
-          `Created on ${new Date (props.project.createdAt.toDate()).toLocaleDateString()}  at  ${new Date (props.project.createdAt.toDate()).getHours()}:${new Date (props.project.createdAt.toDate()).getMinutes()}`
-        } </p>
-        <i className="material-icons small removeIcon" onClick={deleteHandler}>delete_forever</i>
+          `Created on ${new Date(props.project.createdAt.toDate()).toLocaleDateString()}  at  ${new Date(props.project.createdAt.toDate()).getHours()}:${new Date(props.project.createdAt.toDate()).getMinutes()}`
+        }
+        </p>
+          <i className="material-icons small removeIcon" onClick={removeHandler}> delete_forever
+          </i>
       </div>
     </div>
   )

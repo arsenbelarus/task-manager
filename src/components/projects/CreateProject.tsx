@@ -1,16 +1,19 @@
 import React, {FormEvent, useState} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addProject} from "../../store/reducers/projectReducer";
+import {AppRootStateType} from "../../store/store";
+import {AppStatusReducerType} from "../../store/reducers/appStatusReducer";
+import Preloader from "../common/Preloader";
 
 const CreateProject = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
   const dispatch = useDispatch()
+  const {loading} = useSelector<AppRootStateType, AppStatusReducerType>(state => state.appStatus)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    debugger
-    e.preventDefault();
-    const projectFromForm = { title, description }
+    e.preventDefault()
+    const projectFromForm = {title, description}
     dispatch(addProject(projectFromForm))
     setTitle('')
     setDescription('')
@@ -42,7 +45,7 @@ const CreateProject = () => {
         <div className={'row'}>
           <div className={'col s12'}>
             <div className={'input-field center'}>
-              <button className={'btn green lighten-2 btnSignUP'}> Create Project </button>
+              <button className={'btn green lighten-2 btnSignUP'}> {loading ? <Preloader/> : `Create Project`} </button>
             </div>
           </div>
         </div>
