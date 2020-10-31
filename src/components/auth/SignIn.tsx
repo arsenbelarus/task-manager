@@ -1,12 +1,18 @@
 import React, {FormEvent, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {AuthReducerType, signIn} from "../../store/reducers/authReducer";
+import {AppRootStateType} from "../../store/store";
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const dispatch = useDispatch();
+  const { authError }  = useSelector<AppRootStateType, AuthReducerType>(state => state.auth)
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(email, password)
+    dispatch(signIn({email, password}))
   }
 
   return (
@@ -33,6 +39,13 @@ const SignIn = () => {
           <div className={'col s12'}>
             <div className={'input-field center'}>
               <button className={'btn green lighten-2 btnSignUP'}> Log In </button>
+            </div>
+          </div>
+        </div>
+        <div className={"row"}>
+          <div className={"col s12"}>
+            <div className={"red-text center"}>
+              {authError ? <p> {authError} </p> : null}
             </div>
           </div>
         </div>
