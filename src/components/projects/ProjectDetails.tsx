@@ -36,7 +36,7 @@ const ProjectDetails = () => {
                  Created on {new Date (singleProject.createdAt.toDate()).toLocaleDateString()}  at  {new Date (singleProject.createdAt.toDate()).getHours()}:{new Date (singleProject.createdAt.toDate()).getMinutes()}`
               </div>
               <Link to={"/"}>
-                 <button className={'btn grey darken-2 removeIcon'}> Go back </button>
+                 <button className={'btn grey darken-2 btnBack'}> Go back </button>
               </Link>
            </div>
         </div>

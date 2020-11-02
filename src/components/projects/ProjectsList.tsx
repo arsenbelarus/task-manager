@@ -1,11 +1,15 @@
-import React, {useEffect} from "react";
+import React, {Dispatch, SetStateAction, useEffect} from "react";
 import ProjectSummary from "./ProjectSummary";
 import {useDispatch, useSelector} from "react-redux";
 import {getProjectsFromFirebase, ProjectReducerType} from "../../store/reducers/projectReducer";
 import {AppRootStateType} from "../../store/store";
 import {Link} from "react-router-dom";
 
-const ProjectsList = () => {
+type ProjectsListType = {
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>,
+}
+
+const ProjectsList = (props: ProjectsListType) => {
   const dispatch = useDispatch()
   const { projects } = useSelector<AppRootStateType, ProjectReducerType>(state => state.project)
 
@@ -19,7 +23,7 @@ const ProjectsList = () => {
         projects && projects.map(project => {
           return (
             <Link key={project.projectId} to={`/project/${project.projectId}`}>
-              <ProjectSummary project={project}/>
+              <ProjectSummary project={project} setIsModalOpen={props.setIsModalOpen}/>
             </Link>
           )
         })
