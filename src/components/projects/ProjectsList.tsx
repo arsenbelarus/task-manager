@@ -11,15 +11,15 @@ const ProjectsList = () => {
 
   useEffect(() => {
     dispatch(getProjectsFromFirebase)
-  }, [dispatch])
+  }, [dispatch, projects])
 
   return (
     <div className={'projectsList section'}>
       {
         projects && projects.map(project => {
           return (
-            <Link key={project.id} to={`/project/${project.id}`}>
-              <ProjectSummary key={project.id} project={project}/>
+            <Link key={project.projectId} to={`/project/${project.projectId}`}>
+              <ProjectSummary project={project}/>
             </Link>
           )
         })

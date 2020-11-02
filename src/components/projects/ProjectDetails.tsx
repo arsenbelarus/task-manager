@@ -7,7 +7,7 @@ import {ProjectReducerType} from "../../store/reducers/projectReducer";
 const ProjectDetails = () => {
   const {id}: { id: string } = useParams();
   const {projects} = useSelector<AppRootStateType, ProjectReducerType>(state => state.project)
-  const singleProject = projects?.find(project => project.id === id)
+  const singleProject = projects?.find(project => project.projectId === id)
 
   // @ts-ignore
   const { auth } = useSelector<AppRootStateType>(state => state.firebase)

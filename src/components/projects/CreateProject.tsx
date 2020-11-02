@@ -1,31 +1,40 @@
 import React, {FormEvent, useState} from "react";
+import {AppRootStateType} from "../../store/store";
+import {AppStatusReducerType, setUrl} from "../../store/reducers/appStatusReducer";
+import {Redirect} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {addProject} from "../../store/reducers/projectReducer";
-import {AppRootStateType} from "../../store/store";
-import {AppStatusReducerType} from "../../store/reducers/appStatusReducer";
 import Preloader from "../common/Preloader";
-import {Redirect} from "react-router-dom";
+import {firebaseReducer} from "react-redux-firebase";
 
 const CreateProject = () => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+
   const dispatch = useDispatch()
-  const {loading} = useSelector<AppRootStateType, AppStatusReducerType>(state => state.appStatus)
+  const {loading, url} = useSelector<AppRootStateType, AppStatusReducerType>(state => state.appStatus)
+  const {profile, auth} = useSelector<AppRootStateType, ReturnType<typeof firebaseReducer>>(state => state.firebase)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const projectFromForm = {title, description}
+    const projectFromForm = {
+      title,
+      description,
+      userFirstName: profile.firstName,
+      userLastName: profile.lastName,
+      userId: auth.uid
+    }
     dispatch(addProject(projectFromForm))
     setTitle('')
     setDescription('')
   }
 
-  // @ts-ignore
-  const { auth } = useSelector<AppRootStateType>(state => state.firebase)
-
-
   if (!auth.uid) {
     return <Redirect to={"/signin"}/>
+  }
+
+  if (url) {
+    return <Redirect to={url} />
   }
 
   return (

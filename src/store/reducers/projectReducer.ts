@@ -1,6 +1,6 @@
 import {Dispatch} from "react";
 import {projectFirestore, timestamp} from "../../config/firebaseConfig"
-import {toggleLoadingAC} from "./appStatusReducer";
+import {setUrl, toggleLoadingAC} from "./appStatusReducer";
 
 const ADD_PROJECT = 'ADD_PROJECT';
 const DELETE_PROJECT = 'DELETE_PROJECT';
@@ -14,7 +14,7 @@ export const projectReducer = (state = initState, action: ActionTypes) => {
     case ADD_PROJECT:
       return {...state, projects: [action.project, ...state.projects]}
     case DELETE_PROJECT:
-      return {...state, projects: state.projects.filter((project: ProjectType)  => project.id !== action.id)}
+      return {...state, projects: state.projects.filter((project: ProjectType)  => project.projectId !== action.id)}
     case SET_PROJECTS:
       return {...state, projects: action.data}
     default:
@@ -30,21 +30,23 @@ export const setProjectsAC = (data: ProjectType[]) => ({type: SET_PROJECTS, data
 
 //THUNKS
 export const addProject = (project: ProjectType) => {
+  debugger
   return (dispatch: Dispatch<any>) => {
     dispatch(toggleLoadingAC(true))
     // call to cloud firestore
     projectFirestore.collection('projects').add({
       ...project,
-      userFirstName: 'David',
-      userLastName: 'Vaskanian',
       createdAt: timestamp()
     })
       .then(() => {
         dispatch(getProjectsFromFirebase)
-        dispatch(toggleLoadingAC(false))
+        dispatch(setUrl("/"))
       })
       .catch((err: any) => {
         throw new Error(err)
+      })
+      .finally(() => {
+        dispatch(toggleLoadingAC(false))
       })
 
     /*
@@ -82,11 +84,13 @@ export const getProjectsFromFirebase = (dispatch: Dispatch<any>) => {
         const id = project.id
         const data = project.data()
         projectsFromServer.push({
-          id,
+          projectId: id,
           title: data.title,
           description: data.description,
           createdAt: data.createdAt,
-          ...data
+          userFirstName: data.userFirstName,
+          userLastName: data.userLastName,
+          userId: data.userId
         })
       });
       dispatch(setProjectsAC(projectsFromServer))
@@ -112,10 +116,11 @@ type ActionTypes =
 export type ProjectType = {
   title: string,
   description: string,
-  userFirstName?: string,
-  userLastName?: string,
-  id?: string
+  userFirstName: string,
+  userLastName: string,
+  userId: string
   createdAt?: any,
+  projectId?: string,
 }
 export type ProjectReducerType = {
   projects: ProjectType[] | null

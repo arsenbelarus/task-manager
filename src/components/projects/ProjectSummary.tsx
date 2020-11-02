@@ -7,12 +7,11 @@ type ProjectSummaryType = {
 }
 
 const ProjectSummary = (props: ProjectSummaryType) => {
-
   const dispatch = useDispatch()
 
   const removeHandler = (e: React.BaseSyntheticEvent<MouseEvent, EventTarget & HTMLElement, EventTarget>) => {
     e.preventDefault()
-    dispatch(deleteProject(props.project.id))
+    dispatch(deleteProject(props.project.projectId))
   }
 
   return (
