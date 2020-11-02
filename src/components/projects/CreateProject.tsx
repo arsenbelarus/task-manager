@@ -4,6 +4,7 @@ import {addProject} from "../../store/reducers/projectReducer";
 import {AppRootStateType} from "../../store/store";
 import {AppStatusReducerType} from "../../store/reducers/appStatusReducer";
 import Preloader from "../common/Preloader";
+import {Redirect} from "react-router-dom";
 
 const CreateProject = () => {
   const [title, setTitle] = useState('')
@@ -17,6 +18,14 @@ const CreateProject = () => {
     dispatch(addProject(projectFromForm))
     setTitle('')
     setDescription('')
+  }
+
+  // @ts-ignore
+  const { auth } = useSelector<AppRootStateType>(state => state.firebase)
+
+
+  if (!auth.uid) {
+    return <Redirect to={"/signin"}/>
   }
 
   return (

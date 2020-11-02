@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link, Redirect, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import {ProjectReducerType} from "../../store/reducers/projectReducer";
@@ -8,6 +8,14 @@ const ProjectDetails = () => {
   const {id}: { id: string } = useParams();
   const {projects} = useSelector<AppRootStateType, ProjectReducerType>(state => state.project)
   const singleProject = projects?.find(project => project.id === id)
+
+  // @ts-ignore
+  const { auth } = useSelector<AppRootStateType>(state => state.firebase)
+
+
+  if (!auth.uid) {
+    return <Redirect to={"/signin"}/>
+  }
 
   return (
     <div className={'container section projectDetails'}>

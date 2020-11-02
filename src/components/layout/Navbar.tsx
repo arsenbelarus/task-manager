@@ -4,10 +4,10 @@ import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
+import {firebaseReducer} from "react-redux-firebase";
 
 const Navbar = () => {
-  // @ts-ignore
-  const { auth } = useSelector<AppRootStateType>(state => state.firebase)
+  const { auth } = useSelector<AppRootStateType, ReturnType<typeof firebaseReducer>>(state => state.firebase)
 
   return (
     <div className="navbar-fixed">

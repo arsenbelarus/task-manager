@@ -2,6 +2,8 @@ import React, {FormEvent, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AuthReducerType, signIn} from "../../store/reducers/authReducer";
 import {AppRootStateType} from "../../store/store";
+import {Redirect} from "react-router-dom";
+import Preloader from "../common/Preloader";
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -9,10 +11,17 @@ const SignIn = () => {
 
   const dispatch = useDispatch();
   const { authError }  = useSelector<AppRootStateType, AuthReducerType>(state => state.auth)
+  // @ts-ignore
+  const { auth } = useSelector<AppRootStateType>(state => state.firebase)
+  const loading = useSelector<AppRootStateType>(state => state.appStatus.loading)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(signIn({email, password}))
+  }
+
+  if (auth.uid) {
+    return <Redirect to={"/"}/>
   }
 
   return (
@@ -38,7 +47,7 @@ const SignIn = () => {
         <div className={'row'}>
           <div className={'col s12'}>
             <div className={'input-field center'}>
-              <button className={'btn green lighten-2 btnSignUP'}> Log In </button>
+              <button className={'btn green lighten-2 btnSignUP'}> {loading ? <Preloader/> : "SIGN IN"} </button>
             </div>
           </div>
         </div>

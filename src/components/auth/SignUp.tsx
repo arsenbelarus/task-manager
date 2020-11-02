@@ -1,4 +1,10 @@
 import React, {FormEvent, useState} from "react";
+import {Redirect} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../../store/store";
+import Preloader from "../common/Preloader";
+import {AuthReducerType, signUp} from "../../store/reducers/authReducer";
+import {firestoreReducer} from "redux-firestore";
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -6,9 +12,19 @@ const SignUp = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
+
+  const auth = useSelector<AppRootStateType, ReturnType<typeof firestoreReducer>>(state => state.firebase.auth)
+  const loading = useSelector<AppRootStateType>(state => state.appStatus.loading)
+  const { authError }  = useSelector<AppRootStateType, AuthReducerType>(state => state.auth)
+  const dispatch = useDispatch()
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({email, password, firstName, lastName})
+    dispatch(signUp({email, password, firstName, lastName}))
+  }
+
+  if (auth.uid) {
+    return <Redirect to={"/"}/>
   }
 
   return (
@@ -48,7 +64,14 @@ const SignUp = () => {
         <div className={'row'}>
           <div className={'col s12'}>
             <div className={'input-field center'}>
-              <button className={'btn green lighten-2 btnSignUP'}> Sign Up</button>
+              <button className={'btn green lighten-2 btnSignUP'}> {loading ? <Preloader/> : "SIGN UP"} </button>
+            </div>
+          </div>
+        </div>
+        <div className={"row"}>
+          <div className={"col s12"}>
+            <div className={"red-text center"}>
+              {authError ? <p> {authError} </p> : null}
             </div>
           </div>
         </div>

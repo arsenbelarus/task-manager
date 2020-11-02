@@ -36,7 +36,13 @@ export const rrfProps = {
   firebase,
   config: firebaseConfig,
   dispatch: store.dispatch,
-  createFirestoreInstance
+  createFirestoreInstance,
+  useFirestoreForProfile: true,
+  userProfile: "users",
+  attachAuthIsReady: true,
 };
+
+// @ts-ignore
+window.store = store;
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
