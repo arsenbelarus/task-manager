@@ -9,10 +9,10 @@ import {firebaseReducer} from "react-redux-firebase";
 import Modal from "../common/Modal";
 
 const Dashboard = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [projectIdForModal, setProjectIdForModal] = useState('')
 
   const {auth} = useSelector<AppRootStateType, ReturnType<typeof firebaseReducer>>(state => state.firebase)
-  const {url} = useSelector<AppRootStateType, AppStatusReducerType>(state => state.appStatus)
+  const {url, isModalOpen} = useSelector<AppRootStateType, AppStatusReducerType>(state => state.appStatus)
   const dispatch = useDispatch()
 
   if (!auth.uid) {
@@ -27,8 +27,8 @@ const Dashboard = () => {
     <div className={'dashboard container'}>
       <div className={'row'}>
         <div className={'col s12 m8'}>
-          <ProjectsList setIsModalOpen={setIsModalOpen}/>
-          {isModalOpen && <Modal setIsModalOpen={setIsModalOpen}/>}
+          <ProjectsList setProjectIdForModal={setProjectIdForModal}/>
+          {isModalOpen && <Modal projectIdForModal={projectIdForModal}/>}
         </div>
         <div className={'col s12 m3 offset-m1'}>
           <Notifications/>

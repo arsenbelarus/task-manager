@@ -3,10 +3,11 @@ import {deleteProject, ProjectType} from "../../store/reducers/projectReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import {firebaseReducer} from "react-redux-firebase";
+import {toggleIsModalOpenAC} from "../../store/reducers/appStatusReducer";
 
 type ProjectSummaryType = {
   project: ProjectType,
-  setIsModalOpen: Dispatch<SetStateAction<boolean>>,
+  setProjectIdForModal: Dispatch<SetStateAction<string>>
 }
 
 const ProjectSummary = (props: ProjectSummaryType) => {
@@ -19,7 +20,8 @@ const ProjectSummary = (props: ProjectSummaryType) => {
   }
   const editHandler = (e: React.BaseSyntheticEvent<MouseEvent, EventTarget & HTMLElement, EventTarget>) => {
     e.preventDefault()
-    props.setIsModalOpen(true)
+    dispatch(toggleIsModalOpenAC(true))
+    props.setProjectIdForModal(props.project.projectId || '')
   }
 
   return (

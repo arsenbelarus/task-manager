@@ -1,10 +1,15 @@
 import React from "react";
 
+type PreloaderType = {
+  size?: string,
+  color: string,
+}
 
-const Preloader = () => {
+
+const Preloader = (props: PreloaderType) => {
   return (
-    <div className={"preloader-wrapper small active"}>
-      <div className={"spinner-layer spinner-green-only"}>
+    <div className={`preloader-wrapper ${props.size} active`}>
+      <div className={`spinner-layer spinner-${props.color}-only`}>
         <div className={"circle-clipper left"}>
           <div className={"circle"}/>
         </div>

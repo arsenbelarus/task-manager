@@ -34,7 +34,7 @@ const CreateProject = () => {
   }
 
   if (url) {
-    return <Redirect to={url} />
+    return <Redirect to={url}/>
   }
 
   return (
@@ -63,7 +63,9 @@ const CreateProject = () => {
         <div className={'row'}>
           <div className={'col s12'}>
             <div className={'input-field center'}>
-              <button className={'btn green lighten-2 btnSignUP'}> {loading ? <Preloader/> : `Create Project`} </button>
+              <button className={'btn green lighten-2 btnSignUP'}>
+                {loading ? <Preloader color={"green"} size={"small"}/> : `Create Project`}
+              </button>
             </div>
           </div>
         </div>

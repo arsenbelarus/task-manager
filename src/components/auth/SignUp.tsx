@@ -64,7 +64,7 @@ const SignUp = () => {
         <div className={'row'}>
           <div className={'col s12'}>
             <div className={'input-field center'}>
-              <button className={'btn green lighten-2 btnSignUP'}> {loading ? <Preloader/> : "SIGN UP"} </button>
+              <button className={'btn green lighten-2 btnSignUP'}> {loading ? <Preloader color={"green"} size={"small"}/> : "SIGN UP"} </button>
             </div>
           </div>
         </div>

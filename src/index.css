@@ -8,38 +8,31 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: grey;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
 form {
   padding: 20px;
   margin-top: 60px;
   border-radius: 10px;
 }
-
 form button, form h5 {
   margin: 20px 0;
 }
-
 .btnSignUP {
   width: 80%;
   height: 60px;
   font-size: 1.8rem;
 }
-
 .iconsBlock, .btnBack {
   position: absolute;
   top: 1rem;
   right: 1rem;
 }
-
 .iconsBlock i {
   cursor: pointer;
 }
-
 .iconsBlock i:first-child {
   margin-right: 10px;
 }
@@ -60,4 +53,12 @@ form button, form h5 {
   left: 50%;
   transform: translate(-50%);
   z-index: 2;
+}
+.main-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  font-size: 3rem;
 }
