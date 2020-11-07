@@ -6,11 +6,14 @@ import ProjectDetails from "./components/projects/ProjectDetails";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import CreateProject from "./components/projects/CreateProject";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Navbar/>
+      <ToastContainer position={"bottom-right"} style={{fontSize: "1.2rem", textAlign: "center"}}/>
       <Switch>
         <Route exact path={'/'} component={Dashboard} />
         <Route path={'/project/:id'} component={ProjectDetails} />

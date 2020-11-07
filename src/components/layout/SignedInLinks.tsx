@@ -7,22 +7,22 @@ import {firebaseReducer} from "react-redux-firebase";
 
 const SignedInLinks = () => {
   const dispatch = useDispatch()
-  const { profile } = useSelector<AppRootStateType, ReturnType<typeof firebaseReducer>>(state => state.firebase)
+  const { profile, auth } = useSelector<AppRootStateType, ReturnType<typeof firebaseReducer>>(state => state.firebase)
 
-  const logOutHandler = () => {
-    dispatch(signOut())
+  const logOutHandler = (email: string | null) => {
+    dispatch(signOut(email))
   }
 
   return (
       <ul className={'right'}>
         <li>
-          <NavLink to={'/create'}> New Project </NavLink>
+          <NavLink to={'/create'} className={"navLink"}> New Project </NavLink>
         </li>
         <li>
-          <a onClick={logOutHandler}> Log Out </a>
+          <a onClick={() => logOutHandler(auth.email)} className={"navLink"}> Log Out </a>
         </li>
         <li>
-          <NavLink to={'/'} className={'btn btn-floating green lighten-3'}> {profile.initials} </NavLink>
+          <NavLink to={'/'} className={'btn btn-floating green lighten-3 navLink'}> {profile.initials} </NavLink>
         </li>
       </ul>
   )

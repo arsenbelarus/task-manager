@@ -6,17 +6,17 @@ const TOGGLE_IS_MODAL = "TOGGLE_IS_MODAL";
 const initState = {
   loading: false,
   isModalOpen: false,
-  url: ""
+  url: "",
 }
 
 
 export const appStatusReducer = (state = initState, action: ActionType) => {
   switch (action.type) {
-    case "TOGGLE_LOADING":
+    case TOGGLE_LOADING:
       return {...state, loading: !state.loading}
-    case "SET_REDIRECTION_URL":
+    case SET_REDIRECTION_URL:
       return {...state, url: action.url}
-    case "TOGGLE_IS_MODAL":
+    case TOGGLE_IS_MODAL:
       return {...state, isModalOpen: action.isOpen}
     default:
       return state
@@ -36,5 +36,5 @@ type ActionType =
 export type AppStatusReducerType = {
   loading: boolean,
   url: string,
-  isModalOpen: boolean
+  isModalOpen: boolean,
 }

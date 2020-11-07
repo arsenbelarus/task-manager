@@ -23,9 +23,12 @@ const ProjectDetails = () => {
         singleProject &&
         <div className={'card z-depth-0'}>
            <div className={'card-content'}>
-              <span className={'card-title'}> {singleProject.title} </span>
+              <span className={'card-title center'}> {singleProject.title} </span>
               <p>
                 {singleProject.description}
+              </p>
+              <p>
+                {singleProject.projectStatus}
               </p>
            </div>
            <div className={'card-action grey grey-text lighten-4'}>

@@ -1,16 +1,15 @@
 import {Dispatch} from "react";
 import {authFirebase, projectFirestore} from "../../config/firebaseConfig";
 import {toggleLoadingAC} from "./appStatusReducer";
+import {toast} from "react-toastify";
 
 const SIGNIN_SUCCESS = "SIGNIN_SUCCESS";
 const SIGNIN_ERROR = "SIGNIN_ERROR";
 const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 const SIGNUP_ERROR = "SIGNUP_ERROR";
-const SET_USER_DATA = "SET_USER_DATA";
 
 const initState = {
   authError: null,
-  userProfileData: null
 }
 
 
@@ -37,31 +36,32 @@ const SignInSuccessAC = () => ({type: SIGNIN_SUCCESS} as const)
 const SignInErrorAC = (err: ErrorType) => ({type: SIGNIN_ERROR, err} as const)
 const SignUpSuccessAC = () => ({type: SIGNUP_SUCCESS} as const)
 const SignUpErrorAC = (err: ErrorType) => ({type: SIGNUP_ERROR, err} as const)
-const SetUserProfileDataAC = (userData: any) => ({type: SET_USER_DATA, userData})
 
 //THUNKS
 export const signIn = (credentials: { email: string, password: string }) => {
   return (dispatch: Dispatch<any>) => {
     dispatch(toggleLoadingAC(true))
     authFirebase.signInWithEmailAndPassword(credentials.email, credentials.password)
-      .then(() => {
+      .then((res) => {
         dispatch(SignInSuccessAC())
+        toast.info(`User with email: ${res.user?.email} has signed in`)
       })
       .catch((err: ErrorType) => {
       dispatch(SignInErrorAC(err))
+        toast.error(err.message)
     })
       .finally(() => {
         dispatch(toggleLoadingAC(false))
       })
   }
 }
-export const signOut = () => {
+export const signOut = (email: string | null) => {
   return (dispatch: Dispatch<any>) => {
     authFirebase.signOut()
-      .then(() => {
-        console.log("Signed out")
+      .then((res) => {
+        toast.info(`User with email: ${email} has signed out`)
       }).catch((err: ErrorType) => {
-      console.log("Error while signing out")
+      toast.error(err.message)
     })
   }
 }
@@ -76,11 +76,13 @@ export const signUp = (newUser: NewUserType) => {
           initials: newUser.firstName[0] + newUser.lastName[0]
         })
       })
-      .then(() => {
+      .then((res) => {
+        toast.success(`User with email ${newUser.email} has been added`)
         dispatch(SignUpSuccessAC())
       })
       .catch((err: ErrorType) => {
         dispatch(SignUpErrorAC(err))
+        toast.error(err.message)
     })
       .finally(() => {
         dispatch(toggleLoadingAC(false))

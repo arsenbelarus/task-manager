@@ -3,7 +3,7 @@ import {Redirect} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import Preloader from "../common/Preloader";
-import {AuthReducerType, signUp} from "../../store/reducers/authReducer";
+import {signUp} from "../../store/reducers/authReducer";
 import {firestoreReducer} from "redux-firestore";
 
 const SignUp = () => {
@@ -15,7 +15,6 @@ const SignUp = () => {
 
   const auth = useSelector<AppRootStateType, ReturnType<typeof firestoreReducer>>(state => state.firebase.auth)
   const loading = useSelector<AppRootStateType>(state => state.appStatus.loading)
-  const { authError }  = useSelector<AppRootStateType, AuthReducerType>(state => state.auth)
   const dispatch = useDispatch()
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -65,13 +64,6 @@ const SignUp = () => {
           <div className={'col s12'}>
             <div className={'input-field center'}>
               <button className={'btn green lighten-2 btnSignUP'}> {loading ? <Preloader color={"green"} size={"small"}/> : "SIGN UP"} </button>
-            </div>
-          </div>
-        </div>
-        <div className={"row"}>
-          <div className={"col s12"}>
-            <div className={"red-text center"}>
-              {authError ? <p> {authError} </p> : null}
             </div>
           </div>
         </div>
