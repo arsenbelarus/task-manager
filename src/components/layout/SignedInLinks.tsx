@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {signOut} from "../../store/reducers/authReducer";
 import {AppRootStateType} from "../../store/store";
 import {firebaseReducer} from "react-redux-firebase";
+import CheckBox from "./Checkbox";
 
 const SignedInLinks = () => {
   const dispatch = useDispatch()
@@ -16,6 +17,9 @@ const SignedInLinks = () => {
   return (
       <ul className={'right'}>
         <li>
+          <CheckBox/>
+        </li>
+        <li>
           <NavLink to={'/create'} className={"navLink"}> New Project </NavLink>
         </li>
         <li>
@@ -24,6 +28,7 @@ const SignedInLinks = () => {
         <li>
           <NavLink to={'/'} className={'btn btn-floating green lighten-3 navLink'}> {profile.initials} </NavLink>
         </li>
+
       </ul>
   )
 }

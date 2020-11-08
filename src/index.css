@@ -6,47 +6,49 @@ body {
     font-size: 62.5%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: grey;
+    background-color: #232b2b;
+    color: 	#3b444b;
 }
-
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
+.dashboard {
+    margin-top: 1rem;
+}
+.nav-wrapper {
+    background-color: #353839;
+}
+nav .right li:first-child{
+    margin-right: 1rem;
+}
 form {
     padding: 20px;
     margin-top: 60px;
     border-radius: 10px;
 }
-
 form button, form h5 {
     margin: 20px 0;
 }
-
 .btnSignUP {
     width: 80%;
     height: 60px;
     font-size: 1.8rem;
 }
-
 .iconsBlock {
     position: absolute;
     top: .5rem;
     right: .2rem;
 }
-
 .btnBack {
     position: absolute;
     top: 1rem;
     right: 1rem;
 }
-
 .iconsBlock i {
     cursor: pointer;
 }
-
-
 .modal-container {
     position: fixed;
     top: 0;
@@ -56,7 +58,6 @@ form button, form h5 {
     background-color: rgba(0, 0, 0, .7);
     z-index: 2;
 }
-
 .modal {
     display: flex;
     flex-direction: column;
@@ -66,34 +67,61 @@ form button, form h5 {
     transform: translate(-50%);
     z-index: 2;
 }
-
 .main-loader {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    font-size: 3rem;
 }
-
+.circle-clipper .circle {
+    border-width: 10px;
+}
 .projects-header {
-    height: 3rem;
     font-size: 1.5rem;
     color: ivory;
     font-weight: bold;
     margin-top: 1rem;
-    display: flex;
-    align-items: center;
 }
-
+.projects-header-item {
+    border-right: 4px solid ivory;
+    border-top: 4px solid ivory;
+    height: 100%;
+    padding-top: 2rem !important;
+    position: relative;
+    line-height: 1.5rem;
+}
+.projects-header-item::after {
+    content: "";
+    position: absolute;
+    height: 70%;
+    width: 100%;
+    top: 100%;
+    left: 4px;
+    border-right: 4px solid ivory;
+}
+.projects-header-item:last-child, .projects-header-item:last-child::after {
+    border-right: none;
+}
+.projects-content {
+    margin-top: 2rem;
+}
 .btn-group {
     display: flex;
     width: 100%;
     justify-content: space-between;
 }
-
 .card .card-content {
     padding: 2rem 2rem 0 2rem;
+}
+.checkbox {
+    align-self: center;
+}
+.checkbox label {
+    color: ivory;
+}
+[type="checkbox"]+span:not(.lever):before, [type="checkbox"]:not(.filled-in)+span:not(.lever):after {
+    border: 2px solid ivory;
 }
 
 

@@ -3,6 +3,7 @@ import {Link, Redirect, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import {ProjectReducerType} from "../../store/reducers/projectReducer";
+import moment from "moment";
 
 const ProjectDetails = () => {
   const {id}: { id: string } = useParams();
@@ -33,10 +34,10 @@ const ProjectDetails = () => {
            </div>
            <div className={'card-action grey grey-text lighten-4'}>
               <div>
-                Posted by <i> {singleProject.userFirstName} {singleProject.userLastName}</i>
+                <strong>Posted by: </strong><i> {singleProject.userFirstName} {singleProject.userLastName}</i>
               </div>
               <div>
-                 Created on {new Date (singleProject.createdAt.toDate()).toLocaleDateString()}  at  {new Date (singleProject.createdAt.toDate()).getHours()}:{new Date (singleProject.createdAt.toDate()).getMinutes()}`
+                 <strong>Created on: </strong>{moment(singleProject.createdAt.toDate()).format('MMMM Do YYYY, H:mm')}
               </div>
               <Link to={"/"}>
                  <button className={'btn grey darken-2 btnBack'}> Go back </button>

@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <div className="navbar-fixed">
-      <nav className='nav-wrapper grey darken-3'>
+      <nav className='nav-wrapper'>
         <div className='container'>
           <Link to={'/'} className={'brand-logo hide-on-small-and-down'}> TASK-MANAGER </Link>
           {auth.uid ? < SignedInLinks/> : < SignedOutLinks/>}

@@ -3,8 +3,8 @@ import {deleteProject, ProjectType, updateProjectStatus} from "../../store/reduc
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import {firebaseReducer} from "react-redux-firebase";
-import {AppStatusReducerType, toggleIsModalOpenAC} from "../../store/reducers/appStatusReducer";
-import Preloader from "../common/Preloader";
+import {toggleIsModalOpenAC} from "../../store/reducers/appStatusReducer";
+import moment from "moment";
 
 type ProjectSummaryType = {
   project: ProjectType,
@@ -45,11 +45,8 @@ const ProjectSummary = (props: ProjectSummaryType) => {
     <div className={'card z-depth-4 projectSummary'}>
       <div className={'card-content grey-text text-darken-3'}>
         <span className={'card-title'}>  {props.project.title}  </span>
-        <p> {`Posted by ${props.project.userFirstName} ${props.project.userLastName}`} </p>
-        <p className={'grey-text'}> {
-          `Created on ${new Date(props.project.createdAt.toDate()).toLocaleDateString()}  at  ${new Date(props.project.createdAt.toDate()).getHours()}:${new Date(props.project.createdAt.toDate()).getMinutes()}`
-        }
-        </p>
+        <p> <strong> Posted by:  </strong>{props.project.userFirstName} {props.project.userLastName}</p>
+        <p className={'grey-text'}> <strong> Created: </strong>{moment(props.project.createdAt.toDate()).fromNow()}</p>
 
         {/*!====>>>>>> Icons for editing and deleting project. Only project starter can edit or delete project <<<<<=======!*/}
 
