@@ -80,7 +80,7 @@ export const addProject = (project: ProjectType) => {
                 userId: data.userId,
                 projectStatus: data.projectStatus,
               }))
-              dispatch(setUrl("/"))
+              dispatch(setUrl("/task-manager"))
               toast.success("Project successfully added")
             });
           })

@@ -26,7 +26,7 @@ const SignedInLinks = () => {
           <a onClick={() => logOutHandler(auth.email)} className={"navLink"}> Log Out </a>
         </li>
         <li>
-          <NavLink to={'/'} className={'btn btn-floating green lighten-3 navLink'}> {profile.initials} </NavLink>
+          <NavLink to={'/task-manager'} className={'btn btn-floating green lighten-3 navLink'}> {profile.initials} </NavLink>
         </li>
 
       </ul>

@@ -20,7 +20,7 @@ const SignIn = () => {
   }
 
   if (auth.uid) {
-    return <Redirect to={"/"}/>
+    return <Redirect to={"/task-manager"}/>
   }
 
   return (

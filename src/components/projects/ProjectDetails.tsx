@@ -4,14 +4,14 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import {ProjectReducerType} from "../../store/reducers/projectReducer";
 import moment from "moment";
+import {firebaseReducer} from "react-redux-firebase";
 
 const ProjectDetails = () => {
   const {id}: { id: string } = useParams();
   const {projects} = useSelector<AppRootStateType, ProjectReducerType>(state => state.project)
   const singleProject = projects?.find(project => project.projectId === id)
 
-  // @ts-ignore
-  const { auth } = useSelector<AppRootStateType>(state => state.firebase)
+  const { auth } = useSelector<AppRootStateType, ReturnType<typeof firebaseReducer>>(state => state.firebase)
 
 
   if (!auth.uid) {

@@ -16,6 +16,7 @@ const App = () => {
       <ToastContainer position={"bottom-right"} style={{fontSize: "1.2rem", textAlign: "center"}}/>
       <Switch>
         <Route exact path={'/'} component={Dashboard} />
+        <Route path={'/task-manager'} component={Dashboard} />
         <Route path={'/project/:id'} component={ProjectDetails} />
         <Route path={'/signin'} component={SignIn} />
         <Route path={'/signup'} component={SignUp} />
