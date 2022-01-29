@@ -2,8 +2,8 @@ import React, {FormEvent, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {signIn} from "../../store/reducers/authReducer";
 import {AppRootStateType} from "../../store/store";
-import {Redirect} from "react-router-dom";
 import Preloader from "../common/Preloader";
+import { Navigate } from "react-router-dom";
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -20,7 +20,7 @@ const SignIn = () => {
   }
 
   if (auth.uid) {
-    return <Redirect to={"/task-manager"}/>
+    return <Navigate to={"/task-manager"}/>
   }
 
   return (

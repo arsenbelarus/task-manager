@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Switch, BrowserRouter} from 'react-router-dom';
+import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import Navbar from "./components/layout/Navbar";
 import Dashboard from "./components/dashboard/Dashboard";
 import ProjectDetails from "./components/projects/ProjectDetails";
@@ -9,19 +9,19 @@ import CreateProject from "./components/projects/CreateProject";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const App = () => {
+const App = ( ) => {
   return (
     <BrowserRouter>
       <Navbar/>
       <ToastContainer position={"bottom-right"} style={{fontSize: "1.2rem", textAlign: "center"}}/>
-      <Switch>
-        <Route exact path={'/'} component={Dashboard} />
-        <Route path={'/task-manager'} component={Dashboard} />
-        <Route path={'/project/:id'} component={ProjectDetails} />
-        <Route path={'/signin'} component={SignIn} />
-        <Route path={'/signup'} component={SignUp} />
-        <Route path={'/create'} component={CreateProject} />
-      </Switch>
+      <Routes>
+        <Route path={'/'} element={Dashboard()} />
+        <Route path={'/task-manager'} element={Dashboard()} />
+        <Route path={'/project/:id'} element={ProjectDetails()} />
+        <Route path={'/signin'} element={SignIn()} />
+        <Route path={'/signup'} element={SignUp()} />
+        <Route path={'/create'} element={CreateProject()} />
+      </Routes>
     </BrowserRouter>
   );
 }
