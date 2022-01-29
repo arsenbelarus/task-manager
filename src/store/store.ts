@@ -7,7 +7,7 @@ import {projectReducer} from "./reducers/projectReducer";
 import firebase, {firebaseConfig} from "./../config/firebaseConfig";
 import {appStatusReducer} from "./reducers/appStatusReducer";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   auth: authReducer,
   project: projectReducer,
   firebase: firebaseReducer,
